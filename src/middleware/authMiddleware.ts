@@ -23,7 +23,6 @@ export const authMiddleware = (
   next: NextFunction
 ) => {
 
-  req.headers.authorization = "Barear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5Njk4MDA4LCJleHAiOjE2Nzk3MDg4MDh9.wBtETbhhk3cvaLyNqzE3EpTL2HwDn8Kl9Vxrgso-K6Q"
   const authorization = req.headers.authorization;
 
   if (!authorization) {

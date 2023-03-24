@@ -94,6 +94,8 @@ services:
     ports:
       - "5432:5432"
 ```
+
+3. Ao utilizar o docker-compose, o banco de dados ficará salvo na máquina local, pois ele cria uma pasta chamada "data" no repositório. Dessa forma, é possível matar o container sem perder os dados cadastrados no banco.
 ## Rotas 🚗
 <br/>
 

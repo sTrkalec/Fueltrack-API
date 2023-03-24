@@ -4,7 +4,7 @@ Este projeto tem como objetivo ser uma API RESTful para controle de veículos e 
 
 <br/>
 
-<div style=" display: flex; justify-content: center;">
+<div align="center">
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

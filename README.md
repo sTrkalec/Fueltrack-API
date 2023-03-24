@@ -131,12 +131,14 @@ resposta:
 ```json
 {
 	"user": {
-		"id": 4,
-		"cpf": "04845388103",
-		"password": "$2b$10$vGFaw3OErct2uH0vJ0AHmOBvnoUY1j6GI6re.MBoU9RKadgDps97.",
-		"createdAt": "2023-03-24T22:43:38.215Z"
-	}
+		"id": 1,
+		"cpf": "01356938108",
+		"password": "$2b$10$4zedcHaVuhyNWoRKA46Q6OK97SA1ZVo4TR7ZGlfhT2AxzrYR8ZNyG",
+		"createdAt": "2023-03-24T19:06:31.003Z"
+	},
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5NzAwOTY3LCJleHAiOjE2Nzk3MTE3Njd9.FX1WGAWLO0tGo60yPGDL_AiPbAKEcVXAK0vEpi1Tgl8"
 }
+
 ```
 <br/>
 

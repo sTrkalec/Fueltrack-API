@@ -100,7 +100,7 @@ services:
 
 ### Usuários
 
-#### `POST /users`
+#### `POST /users/register`
 
 Cria um novo usuário com as informações especificadas no corpo da requisição.
 

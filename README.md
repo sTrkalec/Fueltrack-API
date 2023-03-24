@@ -35,12 +35,12 @@ As dependências utilizadas no projeto estão listadas no arquivo `package.json`
 1. Clone este repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/sTrkalec/Fueltrack.git
 ```
 
 2. Instale as dependências:
 ```bash
-cd nome-do-repositorio
+cd Fueltrack
 npm install
 ```
 

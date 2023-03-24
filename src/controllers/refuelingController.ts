@@ -5,17 +5,20 @@ import { Request, Response } from 'express';
 const prisma = new PrismaClient();
 
 export const createRefueling = async (req: Request, res: Response) => {
-  const { vehicleId, amount, fuelType, price } = req.body;
+
+  const { vehicleId } = req.params;
+  const { amount, fuelType, price } = req.body;
 
   try {
     const refueling = await prisma.refueling.create({
       data: {
-        vehicle: { connect: { id: vehicleId } },
+        vehicle: { connect: { id: Number(vehicleId) } },
         amount,
         fuelType,
         price,
       },
       include: { vehicle: true },
+
     });
     res.status(201).json(refueling);
   } catch (error) {
@@ -24,11 +27,11 @@ export const createRefueling = async (req: Request, res: Response) => {
 };
 
 export const getRefuelingById = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { idFuel } = req.params;
 
   try {
     const refueling = await prisma.refueling.findUnique({
-      where: { id: Number(id) },
+      where: { id: Number(idFuel) },
       include: { vehicle: true },
     });
     if (!refueling) {
@@ -40,33 +43,47 @@ export const getRefuelingById = async (req: Request, res: Response) => {
   }
 };
 
+export const getRefuelingsByUser = async (req: Request, res: Response) => {
+  try {
+    const userId = req.userId;
+    const refuelings = await prisma.refueling.findMany({
+      where: { vehicle: { userId: Number(userId) } },
+      include: { vehicle: true },
+      orderBy: {createdAt: "desc"}
+    });
+    res.status(200).json(refuelings);
+  } catch (error) {
+    res.status(400).json({ message: 'Error getting refuelings', error });
+  }
+};
+
 export const updateRefueling = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { vehicleId, amount, fuelType, price } = req.body;
+  const { idFuel, vehicleId } = req.params;
+  const { amount, fuelType, price } = req.body;
 
   try {
     const refueling = await prisma.refueling.update({
-      where: { id: Number(id) },
+      where: { id: Number(idFuel) },
       data: {
-        vehicle: { connect: { id: vehicleId } },
+        vehicle: { connect: { id: Number(vehicleId)} },
         amount,
         fuelType,
         price,
       },
       include: { vehicle: true },
     });
-    res.status(200).json(refueling);
+    res.status(200).json(refueling, );
   } catch (error) {
     res.status(400).json({ message: 'Error updating refueling', error });
   }
 };
 
 export const deleteRefueling = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { idFuel } = req.params;
 
   try {
     await prisma.refueling.delete({
-      where: { id: Number(id) },
+      where: { id: Number(idFuel) },
     });
     res.status(204).send();
   } catch (error) {

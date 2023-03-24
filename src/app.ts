@@ -6,6 +6,7 @@ import userRoutes from './routes/userRoutes';
 import vehicleRoutes from './routes/vehicleRoutes';
 import refuelingRoutes from './routes/refuelingRoutes';
 
+export const blacklistedTokens: string[] = [];
 
 // Carrega as variáveis de ambiente do arquivo .env para o Node.js
 dotenv.config();

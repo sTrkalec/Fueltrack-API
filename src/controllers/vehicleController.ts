@@ -28,8 +28,10 @@ export const getVehicles = async (req: Request, res: Response) => {
       where: {
         userId: req.userId,
       },
-      include: { refuelings: true },
-
+      include: { refuelings: {
+        orderBy: {createdAt: "desc"}
+      } },
+      orderBy: {createdAt: "desc"}
     });
     res.status(200).json(vehicles);
   } catch (error) {
@@ -44,7 +46,9 @@ export const getVehicleById = async (req: Request, res: Response) => {
       where: {
         id: Number(id),
       },
-      include: { refuelings: true },
+      include: { refuelings: {
+        orderBy : {createdAt: "desc"}
+      } },
     });
 
     if (!vehicle || vehicle.userId !== req.userId) {

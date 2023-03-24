@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { blacklistedTokens } from '../app';
+
 
 const prisma = new PrismaClient();
 
@@ -19,8 +21,9 @@ export const registerUser = async (req: Request, res: Response) => {
     const user = await prisma.user.create({
       data: { cpf, password: hashedPassword },
     });
-    const token = generateToken(user.id);
-    res.status(201).json({ user, token });
+
+    generateToken(user.id);
+    res.status(201).json({ user });
   } catch (error) {
     res.status(400).json({ message: 'Error registering user', error });
   }
@@ -53,13 +56,17 @@ export const getUsers = async (req: Request, res: Response) => {
   try {
     const users = await prisma.user.findMany({
       where: { id: req.userId },
-      include: { 
+      include: {
         vehicles: {
+          orderBy: {createdAt: "desc"},
           include: {
-            refuelings: true
+            refuelings: {
+              orderBy: {createdAt: "desc"}
+            },
           }
-        } 
+        }
       },
+      orderBy: { createdAt: "desc" }
     });
     res.status(200).json(users);
   } catch (error) {
@@ -93,10 +100,24 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 
   try {
+    const user = await prisma.user.findUnique({
+      where: { id: Number(id) },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
     await prisma.user.delete({
       where: { id: Number(id) },
-      include: { vehicles: true },
     });
+
+    // Adicione o token do usuário à lista negra
+    const token = req.headers.authorization?.split(' ')[1];
+    if (token) {
+      blacklistedTokens.push(token);
+    }
+
     res.status(204).send();
   } catch (error) {
     res.status(400).json({ message: 'Error deleting user', error });

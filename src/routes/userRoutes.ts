@@ -3,8 +3,7 @@ import express from 'express';
 import { deleteUser, getUsers, loginUser, registerUser, updateUser } from '../controllers/userController';
 
 import { authMiddleware } from '../middleware/authMiddleware';
-import { cpfMiddleware } from '../middleware/cpfMiddleware';
-import { passwordMiddleware } from '../middleware/passwordMiddleware';
+import { cpfMiddleware, passwordMiddleware } from '../middleware/validateUserMiddleware';
 
 const router = express.Router();
 

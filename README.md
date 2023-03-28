@@ -162,7 +162,7 @@ Exemplo de corpo da requisição:
 
 ```json
 {
-  "plate": "NCW5386",
+  "plate": "NCW-5386",
   "renavam": "50761463980",
   "color": "Red",
   "power": 100,
@@ -179,7 +179,7 @@ Exemplo de corpo da requisição:
 
 ```json
 {
-  "plate": "NCW5386",
+  "plate": "NCW-5386",
   "renavam": "50761463980",
   "color": "Black",
   "power": 140,

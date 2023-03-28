@@ -18,7 +18,7 @@ export const createVehicle = async (req: Request, res: Response) => {
     });
     res.status(201).json(vehicle);
   } catch (error) {
-    res.status(400).json({ message: 'Error creating vehicle', error });
+    res.status(400).json({ message: 'Placa ou Renavam já registrada', error });
   }
 };
 

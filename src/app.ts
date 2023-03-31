@@ -15,7 +15,7 @@ const app = express();
 
 // Aplica middlewares
 app.use(cors({
-  origin: '*'
+  origin: "*"
 }));
 
 app.use(express.json());

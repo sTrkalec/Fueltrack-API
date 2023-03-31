@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/register',cpfMiddleware, passwordMiddleware, registerUser);
 router.post('/login', loginUser);
 router.get('/', authMiddleware, getUsers);
-router.put('/:id', authMiddleware, updateUser);
+router.put('/:id', authMiddleware,passwordMiddleware, updateUser);
 router.delete('/:id', authMiddleware, deleteUser);
 
 export default router;

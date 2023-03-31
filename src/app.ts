@@ -14,10 +14,7 @@ dotenv.config();
 const app = express();
 
 // Aplica middlewares
-app.use(cors({
-  origin: "*"
-}));
-
+app.use(cors());
 app.use(express.json());
 
 // Configura rotas

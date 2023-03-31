@@ -82,16 +82,10 @@ export const updateUser = async (req: Request, res: Response) => {
   }
 
   try {
-    const { cpf, password } = req.body;
-
     const user = await prisma.user.update({
       where: { id: Number(id) },
-      data: {
-        cpf,
-        password: password && await bcrypt.hash(password, 10),
-      },
+      data: req.body,
     });
-
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ message: 'Error updating user', error });
